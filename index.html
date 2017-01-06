@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="semantic/dist/semantic.min.css" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Painter</title>
+  </head>
+  <body>
+    <div class="ui fluid container">
+      <div class="ui menu">
+        <div id="open-file" class="item">
+          <div class="ui icon primary button">
+            <i class="folder open icon"></i>
+            Open...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <canvas width="1920" height="1080"></canvas>
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="semantic/dist/semantic.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

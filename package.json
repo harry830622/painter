@@ -1,0 +1,25 @@
+{
+  "name": "painter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry830622/painter.git"
+  },
+  "author": "Harry Chang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harry830622/painter/issues"
+  },
+  "homepage": "https://github.com/harry830622/painter#readme",
+  "dependencies": {
+    "d3": "^4.4.0",
+    "electron": "^1.4.13",
+    "jquery": "^3.1.1",
+    "semantic-ui": "^2.2.7"
+  }
+}
