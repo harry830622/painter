@@ -14,8 +14,9 @@ let maxX = Number.MIN_VALUE;
 let minY = Number.MAX_VALUE;
 let maxY = Number.MIN_VALUE;
 
-function drawLine({ from, to }) {
+function drawLine({ color, from, to }) {
   const ratio = height / (maxY - minY) * 2;
+  context.strokeStyle = color;
   context.beginPath();
   context.moveTo(from.x * ratio, from.y * ratio);
   context.lineTo(to.x * ratio, to.y * ratio);
@@ -30,23 +31,19 @@ function parse(data) {
   const tokens = data.split('\n').map(line => line.split(' '));
   tokens.forEach((line) => {
     if (line[0] === 'line') {
-      const x1 = line[1];
-      const y1 = line[2];
-      const x2 = line[3];
-      const y2 = line[4];
+      const color = line[1];
+      const x1 = line[2];
+      const y1 = line[3];
+      const x2 = line[4];
+      const y2 = line[5];
       minX = Math.min(minX, Math.min(x1, x2));
       maxX = Math.max(maxX, Math.max(x1, x2));
       minY = Math.min(minY, Math.min(y1, y2));
       maxY = Math.max(maxY, Math.max(y1, y2));
       lines.push({
-        from: {
-          x: x1,
-          y: y1,
-        },
-        to: {
-          x: x2,
-          y: y2,
-        },
+        color,
+        from: { x: x1, y: y1 },
+        to: { x: x2, y: y2 },
       });
     }
   });
