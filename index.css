@@ -1,16 +1,23 @@
-canvas {
-  left: calc(50vw - 1920px / 2);
+:root {
+  --canvas-width: 3840;
+  --canvas-height: 2160;
+}
+
+html, body {
+  height: 100%;
+}
+
+.ui.fluid.container {
+  display: flex;
+  flex-flow: column wrap;
+  height: 100%;
+}
+
+#pixi {
+  flex: 1;
   overflow: hidden;
-  position: fixed;
-  top: calc(50vh - 1080px / 2);
-  z-index: 1;
 }
 
-input[type="file"] {
-  display: none;
-}
-
-.ui.menu {
-  position: relative;
-  z-index: 2;
+#pixi canvas {
+  width: 100%;
 }

@@ -8,17 +8,14 @@
   </head>
   <body>
     <div class="ui fluid container">
-      <div class="ui menu">
-        <div id="open-file" class="item">
-          <div class="ui icon primary button">
-            <i class="folder open icon"></i>
-            Open...
-          </div>
-        </div>
+      <div class="ui labeled icon menu">
+        <a class="item">
+          <i class="folder open icon"></i>
+          Open...
+        </a>
       </div>
+      <div id="pixi" class="ui segment"></div>
     </div>
-
-    <canvas width="1920" height="1080"></canvas>
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="semantic/dist/semantic.min.js"></script>

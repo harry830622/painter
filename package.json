@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/harry830622/painter#readme",
   "dependencies": {
-    "d3": "^4.4.0",
     "electron": "^1.4.13",
-    "semantic-ui": "^2.2.7",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "pixi.js": "^4.3.1",
+    "semantic-ui": "^2.2.7"
   }
 }
