@@ -9,7 +9,7 @@
   <body>
     <div class="ui fluid container">
       <div class="ui labeled icon menu">
-        <a class="item">
+        <a id="open-file" class="item">
           <i class="folder open icon"></i>
           Open...
         </a>
@@ -19,6 +19,6 @@
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="semantic/dist/semantic.min.js"></script>
-    <script src="index.js"></script>
+    <script>window.app = require('./index.js');</script>
   </body>
 </html>
