@@ -53,14 +53,14 @@ function createLine(line) {
   updateBoundingBox({ x: xFrom, y: yFrom }, { x: xTo, y: yTo });
 
   const pen = new pixi.Graphics();
-  pen.lineStyle(1);
-  pen.moveTo(xFrom, yFrom);
-  pen.lineTo(xTo, yTo);
+  pen.lineStyle(line.width, line.color)
+    .moveTo(xFrom, yFrom)
+    .lineTo(xTo, yTo);
 
   return pen;
 }
 
-function createPolygon(polygon, color = 0x0000FF) {
+function createPolygon(polygon) {
   const pen = new pixi.Graphics();
 
   if (polygon.points) {
@@ -70,7 +70,8 @@ function createPolygon(polygon, color = 0x0000FF) {
 
     const points = polygon.points.map(({ x, y }) => new pixi.Point(x, y));
     pen
-      .beginFill(color)
+      .lineStyle(1, 0x000000)
+      .beginFill(polygon.color)
       .drawPolygon(points)
       .endFill();
   }
