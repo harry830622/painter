@@ -45,48 +45,54 @@ function updateBoundingBox(...points) {
 }
 
 function createLine(line) {
-  const xFrom = line.from.x;
-  const yFrom = line.from.y;
-  const xTo = line.to.x;
-  const yTo = line.to.y;
-
-  updateBoundingBox({ x: xFrom, y: yFrom }, { x: xTo, y: yTo });
-
+  const { from, to } = line;
   const pen = new pixi.Graphics();
   pen.lineStyle(line.width, line.color)
-    .moveTo(xFrom, yFrom)
-    .lineTo(xTo, yTo);
+    .moveTo(from.x, maxY - from.y)
+    .lineTo(to.y, maxY - to.y);
+
+  return pen;
+}
+
+function createRect(rect) {
+  const { lower_left, upper_right } = rect;
+  const width = upper_right.x - lower_left.x;
+  const height = upper_right.y - lower_left.y;
+
+  const pen = new pixi.Graphics();
+  pen
+    .lineStyle(5, 0x000000)
+    .beginFill(rect.color)
+    .drawRect(lower_left.x, maxY - upper_right.y, width, height)
+    .endFill();
 
   return pen;
 }
 
 function createPolygon(polygon) {
   const pen = new pixi.Graphics();
-
-  if (polygon.points) {
-    polygon.points.forEach((point) => {
-      updateBoundingBox(point);
-    });
-
-    const points = polygon.points.map(({ x, y }) => new pixi.Point(x, y));
-    pen
-      .lineStyle(1, 0x000000)
-      .beginFill(polygon.color)
-      .drawPolygon(points)
-      .endFill();
-  }
+  const points = polygon.points.map(({ x, y }) => new pixi.Point(x, maxY - y));
+  pen
+    .lineStyle(5, 0x000000)
+    .beginFill(polygon.color)
+    .drawPolygon(points)
+    .endFill();
 
   return pen;
 }
 
-function create(shape) {
-  switch (shape.type) {
+function create(object) {
+  switch (object.type) {
     case 'line': {
-      const line = shape;
+      const line = object;
       return createLine(line);
     }
+    case 'rect': {
+      const rect = object;
+      return createRect(rect);
+    }
     case 'polygon': {
-      const polygon = shape;
+      const polygon = object;
       return createPolygon(polygon);
     }
     default: { break; }
@@ -97,6 +103,40 @@ function create(shape) {
 
 function draw(graphic) {
   const painting = new pixi.Graphics();
+
+  graphic.objects.forEach((object) => {
+    switch (object.type) {
+      case 'line': {
+        const line = object;
+        const { from, to } = line;
+
+        updateBoundingBox({ x: from.x, y: from.y }, { x: to.x, y: to.y });
+
+        break;
+      }
+      case 'rect': {
+        const rect = object;
+        const { lower_left, upper_right } = rect;
+
+        updateBoundingBox(lower_left, upper_right);
+
+        break;
+      }
+      case 'polygon': {
+        const polygon = object;
+
+        updateBoundingBox(...polygon.points);
+
+        break;
+      }
+      default: { break; }
+    }
+  });
+
+  console.log(minX);
+  console.log(minY);
+  console.log(maxX);
+  console.log(maxY);
 
   graphic.objects.map(create).forEach((pen) => {
     painting.addChild(pen);
